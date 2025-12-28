@@ -23,7 +23,7 @@ jobs:
         run: python preprocessing/automate_rifqimakarim.py
 
       - name: Upload Preprocessed Data
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: output-dataset
           path: preprocessing/bank_preprocessed.csv
