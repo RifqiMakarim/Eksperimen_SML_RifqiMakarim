@@ -8,9 +8,13 @@ Original file is located at
 """
 
 import pandas as pd
+import os
 from sklearn.preprocessing import LabelEncoder, StandardScaler
 
 def preprocess_data(file_path):
+
+    if not os.path.exists(file_path):
+        raise FileNotFoundError(f"File {file_path} tidak ditemukan.")
 
     df = pd.read_csv(file_path, sep=';')
     df = df.drop_duplicates()
@@ -36,9 +40,12 @@ def preprocess_data(file_path):
     return df_final
 
 if __name__ == "__main__":
-
     input_file = 'bankmarketing_raw.csv'
-    output_file = 'bankmarketing_preprocessed.csv'
+
+    output_folder = 'preprocessing'
+
+    os.makedirs(output_folder, exist_ok=True)
+    output_file = os.path.join(output_folder, 'bank_preprocessed.csv')
 
     processed_df = preprocess_data(input_file)
     processed_df.to_csv(output_file, index=False)
